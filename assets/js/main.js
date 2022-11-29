@@ -1,5 +1,8 @@
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
+const fButton = document.getElementById('fButton')
+const popup = document.getElementById('popup')
+const cbButtons = document.querySelectorAll('#cbButton')
 
 const maxRecords = 151
 const limit = 10
@@ -44,4 +47,21 @@ loadMoreButton.addEventListener('click', () => {
     } else {
         loadPokemonItens(offset, limit)
     }
+})
+
+fButton.addEventListener('click', () => {
+    fButton.style.display = "none"
+    popup.style.display = "flex"
+})
+
+cbButtons.forEach((button)=>{
+    button.addEventListener('click',()=>{
+        var filter = pokemonList.getElementsByClassName(`pokemon ${button.className}`)
+        var list = pokemonList.getElementsByTagName('li')[0]
+        for (i = 0; i < filter.length; i++) {
+            filter[i].parentNode.insertBefore(filter[i], list)
+        }
+        popup.style.display = "none"
+        fButton.style.display = "flex"
+    })
 })
